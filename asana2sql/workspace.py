@@ -2,64 +2,64 @@ from asana2sql.cache import Cache
 
 PROJECTS_TABLE_NAME = "projects"
 CREATE_PROJECTS_TABLE = (
-        """CREATE TABLE IF NOT EXISTS "{table_name}" (
+        """CREATE TABLE IF NOT EXISTS `{table_name}` (
         id INTEGER NOT NULL PRIMARY KEY,
         name VARCHAR(1024));
         """)
-SELECT_PROJECTS = """SELECT * FROM "{table_name}";"""
+SELECT_PROJECTS = """SELECT * FROM `{table_name}`;"""
 INSERT_PROJECT = (
-        """INSERT OR REPLACE INTO "{table_name}" VALUES (?, ?);""")
+        """REPLACE INTO `{table_name}` VALUES (?, ?);""")
 
 PROJECT_MEMBERSHIPS_TABLE_NAME = "project_memberships"
 CREATE_PROJECT_MEMBERSHIPS_TABLE = (
-        """CREATE TABLE IF NOT EXISTS "{table_name}" (
+        """CREATE TABLE IF NOT EXISTS `{table_name}` (
         task_id INTEGER NOT NULL,
         project_id INTEGER NOT NULL,
         PRIMARY KEY (task_id, project_id));
         """)
 SELECT_PROJECT_MEMBERSHIPS = (
-        """SELECT project_id FROM "{table_name}" WHERE task_id = ?;""")
+        """SELECT project_id FROM `{table_name}` WHERE task_id = ?;""")
 INSERT_PROJECT_MEMBERSHIP = (
-        """INSERT OR REPLACE INTO "{table_name}" VALUES (?, ?);""")
+        """REPLACE INTO `{table_name}` VALUES (?, ?);""")
 DELETE_PROJECT_MEMBERSHIP = (
-        """DELETE FROM "{table_name}" WHERE task_id = ? and project_id = ?;""")
+        """DELETE FROM `{table_name}` WHERE task_id = ? and project_id = ?;""")
 
 USERS_TABLE_NAME = "users"
 CREATE_USERS_TABLE = (
-        """CREATE TABLE IF NOT EXISTS "{table_name}" (
+        """CREATE TABLE IF NOT EXISTS `{table_name}` (
         id INTEGER NOT NULL PRIMARY KEY,
         name VARCHAR(1024));
         """)
-SELECT_USERS = 'SELECT * FROM "{table_name}";';
+SELECT_USERS = 'SELECT * FROM `{table_name}`;';
 INSERT_USER = (
-        """INSERT OR REPLACE INTO "{table_name}" VALUES (?, ?);""")
+        """REPLACE INTO `{table_name}` VALUES (?, ?);""")
 
 FOLLOWERS_TABLE_NAME = "followers"
 CREATE_FOLLOWERS_TABLE = (
-        """CREATE TABLE IF NOT EXISTS "{table_name}" (
+        """CREATE TABLE IF NOT EXISTS `{table_name}` (
         task_id INTEGER NOT NULL,
         user_id INTEGER NOT NULL,
         PRIMARY KEY (task_id, user_id));
         """)
-SELECT_FOLLOWERS = 'SELECT * from "{table_name}" WHERE task_id = ?;';
+SELECT_FOLLOWERS = 'SELECT * from `{table_name}` WHERE task_id = ?;';
 INSERT_FOLLOWER = (
-        """INSERT OR REPLACE INTO "{table_name}" VALUES (?, ?);""")
+        """REPLACE INTO `{table_name}` VALUES (?, ?);""")
 DELETE_FOLLOWER = (
-        """DELETE FROM "{table_name}" WHERE user_id = ? AND task_id = ?;""")
+        """DELETE FROM `{table_name}` WHERE user_id = ? AND task_id = ?;""")
 
 CUSTOM_FIELDS_TABLE_NAME = "custom_fields"
 CREATE_CUSTOM_FIELDS_TABLE = (
-        """CREATE TABLE IF NOT EXISTS "{table_name}" (
+        """CREATE TABLE IF NOT EXISTS `{table_name}` (
         id INTEGER NOT NULL PRIMARY KEY,
         name VARCHAR(1024),
         type INTEGER NOT NULL);
         """)
 INSERT_CUSTOM_FIELD = (
-        """INSERT OR REPLACE INTO "{table_name}" VALUES (?, ?, ?);""")
+        """REPLACE INTO `{table_name}` VALUES (?, ?, ?);""")
 
 CUSTOM_FIELD_ENUM_VALUES_TABLE_NAME = "custom_field_enum_values"
 CREATE_CUSTOM_FIELD_ENUM_VALUES_TABLE = (
-        """CREATE TABLE IF NOT EXISTS "{table_name}" (
+        """CREATE TABLE IF NOT EXISTS `{table_name}` (
         custom_field_id INTEGER NOT NULL,
         id INTEGER NOT NULL,
         name VARCHAR(1024),
@@ -71,13 +71,13 @@ SELECT_CUSTOM_FIELD_ENUM_VALUES = """SELECT * FROM {table_name};"""
 SELECT_CUSTOM_FIELD_ENUM_VALUES_FOR_CUSTOM_FIELD = (
         """SELECT * FROM {table_name} WHERE custom_field_id = ?;""")
 INSERT_CUSTOM_FIELD_ENUM_VALUE = (
-        """INSERT OR REPLACE INTO "{table_name}" VALUES (?, ?, ?, ?, ?);""")
+        """REPLACE INTO `{table_name}` VALUES (?, ?, ?, ?, ?);""")
 DELETE_CUSTOM_FIELD_ENUM_VALUE = (
-        """DELETE FROM "{table_name}" WHERE id = ?;""")
+        """DELETE FROM `{table_name}` WHERE id = ?;""")
 
 CUSTOM_FIELD_VALUES_TABLE_NAME = "custom_field_values"
 CREATE_CUSTOM_FIELD_VALUES_TABLE = (
-        """CREATE TABLE IF NOT EXISTS "{table_name}" (
+        """CREATE TABLE IF NOT EXISTS `{table_name}` (
         task_id INTEGER NOT NULL,
         custom_field_id INTEGER NOT NULL,
         text_value TEXT,
@@ -88,7 +88,7 @@ CREATE_CUSTOM_FIELD_VALUES_TABLE = (
 SELECT_CUSTOM_FIELD_VALUES_FOR_TASK = (
         "SELECT * FROM {table_name} WHERE task_id = ?;")
 INSERT_CUSTOM_FIELD_VALUE = (
-        "INSERT OR REPLACE INTO {table_name} VALUES (?, ?, ?, ?, ?);")
+        "REPLACE INTO {table_name} VALUES (?, ?, ?, ?, ?);")
 DELETE_CUSTOM_FIELD_VALUE = (
         "DELETE FROM {table_name} WHERE task_id = ? AND custom_field_id = ?;")
 

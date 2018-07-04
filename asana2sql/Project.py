@@ -6,16 +6,16 @@ from asana2sql import fields
 from asana2sql import workspace
 
 CREATE_TABLE_TEMPLATE = (
-        """CREATE TABLE IF NOT EXISTS "{table_name}" ({columns});""")
+        """CREATE TABLE IF NOT EXISTS `{table_name}` ({columns});""")
 
 INSERT_OR_REPLACE_TEMPLATE = (
-        """INSERT OR REPLACE INTO "{table_name}" ({columns}) VALUES ({values});""")
+        """REPLACE INTO `{table_name}` ({columns}) VALUES ({values});""")
 
 SELECT_TEMPLATE = (
-        """SELECT {columns} FROM "{table_name}";""")
+        """SELECT {columns} FROM `{table_name}`;""")
 
 DELETE_TEMPLATE = (
-        """DELETE FROM "{table_name}" WHERE {id_column} = ?;""")
+        """DELETE FROM `{table_name}` WHERE {id_column} = ?;""")
 
 class NoSuchProjectException(Exception):
     def __init__(self, project_id):

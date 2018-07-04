@@ -1,8 +1,9 @@
 from enum import Enum
+from datetime import datetime
 import re
 
-FIELD_DEFINITION_TEMPLATE = """"{name}" {type}"""
-PRIMARY_KEY_DEFINITION_TEMPLATE = """"{name}" {type} NOT NULL PRIMARY KEY"""
+FIELD_DEFINITION_TEMPLATE = """`{name}` {type}"""
+PRIMARY_KEY_DEFINITION_TEMPLATE = """`{name}` {type} NOT NULL PRIMARY KEY"""
 
 class SqlType(object):
     STRING = "VARCHAR(1024)"
@@ -51,6 +52,8 @@ class SimpleField(Field):
 
         if self.sql_type == SqlType.BOOLEAN:
             return "1" if data else "0"
+        if self.sql_type == SqlType.DATETIME:
+            return datetime.strptime(data, "%Y-%m-%dT%H:%M:%S.%fZ").strftime("%Y-%m-%d %H:%M:%S") if data else None
         else:
             return data
 
